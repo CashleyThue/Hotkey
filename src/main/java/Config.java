@@ -24,7 +24,7 @@ public class Config {
                     """
                     # Hotkey config
             
-                    META+SEMICOLON=dolphin
+                    CTRL+ALT=dolphin
                     """
             );
         }
