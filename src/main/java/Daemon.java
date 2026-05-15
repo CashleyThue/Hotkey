@@ -3,6 +3,7 @@ import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,10 @@ public class Daemon implements NativeKeyListener {
                     triggered.add(hk);
 
                     try {
-                        new ProcessBuilder(hk.command.split("\\|")).start();
+                        ProcessBuilder pb = new ProcessBuilder(hk.command.split(" "));
+                        pb.directory(new File(System.getProperty("user.home")));
+                        pb.inheritIO();
+                        pb.start();
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
